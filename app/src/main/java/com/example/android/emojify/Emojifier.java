@@ -18,6 +18,7 @@ package com.example.android.emojify;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.renderscript.Double2;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
@@ -58,6 +59,11 @@ class Emojifier {
             Toast.makeText(context, R.string.no_faces_message, Toast.LENGTH_SHORT).show();
         }
 
+       for(int i=0; i < faces.size(); i++){
+           Face face= faces.get(i);
+           getClassifications(face);
+       }
+
         // TODO (2): Iterate through the faces, calling getClassifications() for each face.
 
         // Release the detector
@@ -65,4 +71,10 @@ class Emojifier {
     }
 
     // TODO (1): Create a static method called getClassifications() which logs the probability of each eye being open and that the person is smiling.
+
+    public static void getClassifications(Face face){
+        Log.v(LOG_TAG, "leftEyeOpen Probability: " + face.getIsLeftEyeOpenProbability());
+        Log.v(LOG_TAG, "rightEyeOpen Probability: " + face.getIsRightEyeOpenProbability());
+        Log.v(LOG_TAG, "smilingFace Probability: " + face.getIsSmilingProbability());
+    }
 }
